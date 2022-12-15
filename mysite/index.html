@@ -1,0 +1,37 @@
+<html>
+<script>
+const api_url = 
+      'https://api.thingspeak.com/channels/1976371/feeds.json?results=1';
+  
+// Defining async function
+async function getapi(url) {
+    
+    // Storing response
+    const response = await fetch(url);
+    
+    // Storing data in form of JSON
+    var data = await response.json();
+    console.log(data);
+    if (response) {
+        console.log(data.feeds[0].field1)
+        document.getElementById("p1").innerHTML = data.feeds[0].field1;
+        document.getElementById("p2").innerHTML = data.feeds[0].field2;
+    }
+    // show(data);
+    // const obj = JSON.parse(data)
+    
+}
+
+var intervalId = window.setInterval(function(){
+  getapi(api_url);
+}, 5000);
+
+</script>
+
+<body>
+
+<p>Suhu : </p><p id="p1"></p>
+<p>Kelembapan : </p><p id="p2"></p>
+
+</body>
+</html>
